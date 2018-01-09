@@ -18,6 +18,46 @@
 # они получают удвоенную ЗП, пропорциональную норме.
 # Кол-во часов, которые были отработаны, указаны в файле "data/hours_of"
 
+# Задание-2:
+# Дана ведомость расчета заработной платы (файл "data/workers").
+# Рассчитайте зарплату всех работников, зная что они получат полный оклад,
+# если отработают норму часов. Если же они отработали меньше нормы,
+# то их ЗП уменьшается пропорционально, а за заждый час переработки
+# они получают удвоенную ЗП, пропорциональную норме.
+# Кол-во часов, которые были отработаны, указаны в файле "data/hours_of"
+
+
+# открытие и чтение файлов с исходными данными
+with open('workers.txt', 'r', encoding='UTF-8') as f:
+    workers = f.readlines()
+
+with open('hours_of.txt', 'r', encoding='UTF-8') as g:
+    hours_list = g.readlines()
+
+# очистка исходных списков от символов переноса строки и лишних пробелов
+db = []
+for line in workers:
+    db.append([word.replace('\n', '') for word in line.split(' ') if word != ''])
+
+for line in hours_list:
+    hours = [word.replace('\n', '') for word in line.split(' ') if word != '']
+    for man in db:
+        if man[0] == hours[0] and man[1] == hours[1]:
+            man.append(hours[2])
+
+# добавление столбца для добавления конечных результатов
+db[0].append('Получено')
+
+# цикл проверки условий выплат и вывод конечных результатов
+for man in db[1:]:
+    salary, required, done = int(man[2]), int(man[4]), int(man[5])
+    if done < required:
+        man.append(round(salary * done / required, 2))
+    else:
+        man.append(round(salary + 2 * salary * (done - required) / required, 2))
+    print('{:<8}{:<9}{:<6}{:<13}{:<4}{:<4}{}'.format(*man))
+
+
 
 # Задание-3:
 # Дан файл ("data/fruits") со списком фруктов.
