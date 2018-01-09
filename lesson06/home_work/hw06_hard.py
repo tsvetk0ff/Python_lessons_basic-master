@@ -60,7 +60,7 @@ def data_handler(workers_file, hours_of_file):
     :param hours_of_file:
     :return:
     """
-    # матрица очищенныъх исходных данных
+    # матрица очищенных исходных данных
     with open(workers_file, 'r', encoding='utf-8') as workers_file:
         lst_1 = workers_file.readlines()
         lst_2 = []
@@ -72,7 +72,7 @@ def data_handler(workers_file, hours_of_file):
             lst_2.append(workers)
         lst_2[0].append('Отработано часов')
 
-    # матрица очищенныъх данных по отработке
+    # матрица очищенных данных по отработке
     with open(hours_of_file, 'r', encoding='utf-8') as hours_file:
         lst_raw = hours_file.readlines()
         lst_employee = []
